@@ -19,6 +19,8 @@ img {
 
 #datetime-picker {
   margin-left: 25px;
+  height: 36px;
+  font-size: 20px;
 }
 
 .timer {
