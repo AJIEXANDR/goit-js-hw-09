@@ -25,7 +25,6 @@ const pickerConfig = {
   onClose(selectedDates) {
     const selectedDate = selectedDates[0].getTime();
     dateChecker(Date.now(), selectedDate);
-    timeGlobal = selectedDate;
   },
 };
 
@@ -40,6 +39,7 @@ function onBtnClick() {
     refs.min.textContent = addLeadingZero(minutes);
     refs.sec.textContent = addLeadingZero(seconds);
   }, 1000);
+  refs.btnEl.setAttribute('disabled', true);
 }
 
 function addLeadingZero(value) {
@@ -51,6 +51,7 @@ function dateChecker(dateNow, selectedDate) {
     alert('Please choose a date in the future');
     return;
   } else {
+    timeGlobal = selectedDate;
     refs.btnEl.removeAttribute('disabled');
   }
 }
