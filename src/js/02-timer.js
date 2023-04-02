@@ -1,5 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import Notiflix from 'notiflix';
+
 require('flatpickr/dist/themes/dark.css');
 
 let timeGlobal = null;
@@ -31,13 +33,19 @@ const pickerConfig = {
 flatpickr('#datetime-picker', pickerConfig);
 
 function onBtnClick() {
-  setInterval(() => {
+  const intervalId = setInterval(() => {
     const deltaTime = timeGlobal - Date.now();
     const { days, hours, minutes, seconds } = convertMs(deltaTime);
     refs.days.textContent = addLeadingZero(days);
     refs.hours.textContent = addLeadingZero(hours);
     refs.min.textContent = addLeadingZero(minutes);
     refs.sec.textContent = addLeadingZero(seconds);
+    if (deltaTime < 1000) {
+      clearInterval(intervalId);
+      Notiflix.Notify.success('The sale has started', {
+        timeout: 4000,
+      });
+    }
   }, 1000);
   refs.btnEl.setAttribute('disabled', true);
 }
@@ -48,9 +56,10 @@ function addLeadingZero(value) {
 
 function dateChecker(dateNow, selectedDate) {
   if (selectedDate <= dateNow) {
-    alert('Please choose a date in the future');
-    return;
-  } else {
+    Notiflix.Notify.failure('Please choose a date in the future', {
+      timeout: 2000,
+    });
+  } else if (selectedDate > dateNow) {
     timeGlobal = selectedDate;
     refs.btnEl.removeAttribute('disabled');
   }

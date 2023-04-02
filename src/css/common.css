@@ -23,6 +23,16 @@ img {
   font-size: 20px;
 }
 
+[data-start] {
+  display: inline-block;
+  padding: 15px;
+  width: 100px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 4px double;
+  text-align: center;
+}
+
 .timer {
   display: flex;
   margin-top: 25px;
