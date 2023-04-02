@@ -18,9 +18,11 @@ img {
 }
 
 #datetime-picker {
+  text-align: center;
   margin-left: 25px;
-  height: 36px;
+  height: 40px;
   font-size: 20px;
+  border-radius: 5px;
 }
 
 [data-start] {
