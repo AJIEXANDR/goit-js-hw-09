@@ -27,7 +27,7 @@ function createPromise(position, delay) {
 
 function qunatityOfPromises(delay, amount, step) {
   for (let i = 0; i < amount; i += 1) {
-    totalDelay = Number.parseInt(delay) + i * Number.parseInt(step);
+    const totalDelay = Number.parseInt(delay) + i * Number.parseInt(step);
     createPromise(i + 1, totalDelay)
       .then(resolve => {
         Notiflix.Notify.success(resolve);
