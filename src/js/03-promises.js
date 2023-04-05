@@ -9,13 +9,7 @@ function createPromiseBtn(event) {
     elements: { delay, step, amount },
   } = event.currentTarget;
 
-  createPromise(amount.value, delay.value)
-    .then(resolve => {
-      Notiflix.Notify.success(resolve);
-    })
-    .catch(error => {
-      Notiflix.Notify.failure(error);
-    });
+  qunatityOfPromises(delay.value, amount.value, step.value);
 }
 
 function createPromise(position, delay) {
@@ -29,4 +23,17 @@ function createPromise(position, delay) {
       }
     }, delay);
   });
+}
+
+function qunatityOfPromises(delay, amount, step) {
+  for (let i = 0; i < amount; i += 1) {
+    totalDelay = Number.parseInt(delay) + i * Number.parseInt(step);
+    createPromise(i + 1, totalDelay)
+      .then(resolve => {
+        Notiflix.Notify.success(resolve);
+      })
+      .catch(error => {
+        Notiflix.Notify.failure(error);
+      });
+  }
 }
